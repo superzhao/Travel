@@ -2,7 +2,7 @@
   <div>
     <p class="title">周末去哪</p>
     <ul>
-      <li class="item border-bottom" v-for="item of recommendList" :key="item.id">
+      <li class="item border-bottom" v-for="item of list" :key="item.id">
         <div class="item-img-wrap">
           <img :src="item.imgUrl" alt="清凉你我他" class="item-img">
         </div>
@@ -21,17 +21,8 @@
 <script>
 export default{
   name: 'HomeWeekmend',
-  data () {
-    return {
-      recommendList: [
-        {
-          id: '0001',
-          imgUrl: 'http://img1.qunarzz.com/sight/source/1505/ff/8141ea51e13473.jpg_r_640x214_91ccfee8.jpg',
-          title: '清凉你我他',
-          desc: '炎炎夏日去哪里？水上乐园看比基尼'
-        }
-      ]
-    }
+  props: {
+    list: Array
   }
 }
 </script>
