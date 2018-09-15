@@ -13,20 +13,11 @@
         <span class="iconfont arrow-icon">&#xe64a;</span>
       </div>
     </div>
-    <home-swiper></home-swiper>
-    <home-icons/>
   </div>
 </template>
-
 <script>
-import HomeSwiper from './Swiper'
-import HomeIcons from './Icons'
 export default {
-  name: 'HomeHeader',
-  components: {
-    HomeSwiper,
-    HomeIcons
-  }
+  name: 'HomeHeader'
 }
 </script>
 
