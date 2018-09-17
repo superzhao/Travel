@@ -2,19 +2,25 @@
   <div>
     <city-header/>
     <city-search/>
+    <city-list/>
+    <city-alphabet/>
   </div>
 </template>
 <script>
 import CityHeader from './components/header'
 import CitySearch from './components/search'
+import CityList from './components/list'
+import CityAlphabet from './components/Alphabet'
 export default{
   name: 'City',
   components: {
     CityHeader,
-    CitySearch
+    CitySearch,
+    CityList,
+    CityAlphabet
   }
 }
 </script>
-<style scoped>
+<style lang="stylus" scoped>
 
 </style>
