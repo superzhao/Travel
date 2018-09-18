@@ -25,6 +25,7 @@
         class="area"
         v-for="(item, key) of cities"
         :key="key"
+        :ref="key"
       >
         <div class="title border-topbottom">{{key}}</div>
         <div class="item-list">
@@ -46,10 +47,18 @@ export default {
   name: 'CityList',
   props: {
     cities: Object,
-    hotCities: Array
+    hotCities: Array,
+    curLetter: String
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
+  },
+  watch: {
+    // 监听curLetter改变，scroll.scrollToElement可以滚动到指定dom结构，参数是个dom
+    // 当ref写在循环元素上时，this.$refs获取到的是一个数组，要[0]才能获取到dom
+    curLetter () {
+      this.scroll.scrollToElement(this.$refs[this.curLetter][0])
+    }
   }
 }
 </script>
