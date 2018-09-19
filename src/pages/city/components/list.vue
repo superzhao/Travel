@@ -5,7 +5,7 @@
         <div class="title border-topbottom">当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
-            <div class="button">城市</div>
+            <div class="button">{{this.city}}</div>
           </div>
         </div>
       </div>
@@ -16,6 +16,7 @@
             class="button-wrapper"
             v-for="item of hotCities"
             :key="item.id"
+            @click="handleCityClick(item.name)"
           >
             <div class="button">{{item.name}}</div>
           </div>
@@ -33,6 +34,7 @@
             class="item border-bottom"
             v-for="innerItem of item"
             :key="innerItem.id"
+            @click="handleCityClick(innerItem.name)"
           >
             {{innerItem.name}}
           </div>
@@ -43,6 +45,7 @@
 </template>
 <script>
 import Bscroll from 'better-scroll'
+import {mapState, mapMutations} from 'vuex'
 export default {
   name: 'CityList',
   props: {
@@ -53,12 +56,22 @@ export default {
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
   },
+  computed: {
+    ...mapState(['city'])
+  },
   watch: {
     // 监听curLetter改变，scroll.scrollToElement可以滚动到指定dom结构，参数是个dom
     // 当ref写在循环元素上时，this.$refs获取到的是一个数组，要[0]才能获取到dom
     curLetter () {
       this.scroll.scrollToElement(this.$refs[this.curLetter][0])
     }
+  },
+  methods: {
+    handleCityClick (city) {
+      this.changeCity(city)
+      this.$router.push('/')
+    },
+    ...mapMutations(['changeCity'])
   }
 }
 </script>
