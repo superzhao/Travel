@@ -1,12 +1,13 @@
 <template lang="html">
   <div>
-    <detail-banner/>
-    <detail-header/>
+    <detail-banner :bannerImg="bannerImg" :sightName="sightName" :gallaryImgs="gallaryImgs"/>
+    <detail-header :imgs="gallaryImgs"/>
     <detail-list :list="list"/>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import DetailBanner from './components/Banner'
 import DetailHeader from './components/Header'
 import DetailList from './components/List'
@@ -14,56 +15,39 @@ export default {
   name: 'Detail',
   data () {
     return {
-      list: [
-        {
-          title: '中秋活动票',
-          children: [
-            {
-              title: '大学生票'
-            },
-            {
-              title: '[夜场]成人票'
-            },
-            {
-              title: '三馆联票',
-              children: [
-                {
-                  title: '三馆联票-馆一'
-                },
-                {
-                  title: '三馆联票-馆二'
-                },
-                {
-                  title: '三馆联票-馆三'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          title: '全价票'
-        },
-        {
-          title: '优惠票',
-          children: [
-            {
-              title: '儿童票'
-            },
-            {
-              title: '老人票'
-            }
-          ]
-        },
-        {
-          title: '一日游'
-        }
-      ]
+      list: [],
+      bannerImg: '',
+      gallaryImgs: [],
+      sightName: ''
     }
   },
   components: {
     DetailBanner,
     DetailHeader,
     DetailList
+  },
+  mounted () {
+    this.getDetailInfo()
+  },
+  methods: {
+    getDetailInfo () {
+      // axios.get('/api/detail.json:id='+this.$route.params.id)
+      axios.get('/api/detail.json', {
+        params: {
+          id: this.$route.params.id
+        }
+      })
+        .then(this.getDetailInfoSucc)
+    },
+    getDetailInfoSucc (res) {
+      if (res.data.ret && res.data.data) {
+        const data = res.data.data
+        this.list = data.categoryList
+        this.bannerImg = data.bannerImg
+        this.gallaryImgs = data.gallaryImgs
+        this.sightName = data.sightName
+      }
+    }
   }
 }
 </script>
