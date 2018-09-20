@@ -2,7 +2,13 @@
   <div>
     <p class="title">热销推荐</p>
     <ul>
-      <li class="item border-bottom" v-for="item of list" :key="item.id">
+      <router-link
+        tag="li"
+        class="item border-bottom"
+        v-for="item of list"
+        :key="item.id"
+        :to="'/detail/'+item.id"
+      >
         <img :src="item.imgUrl" alt="天津海昌极地海洋公园" class="item-img">
         <div class="item-info">
           <p class="item-title">
@@ -13,7 +19,7 @@
           </p>
           <button class="item-button">查看详情</button>
         </div>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>
