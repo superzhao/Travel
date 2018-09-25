@@ -16,7 +16,7 @@
             class="button-wrapper"
             v-for="item of hotCities"
             :key="item.id"
-            @click="handleCityClick(item.name)"
+            @click.prevent="handleCityClick(item.name)"
           >
             <div class="button">{{item.name}}</div>
           </div>
@@ -54,7 +54,7 @@ export default {
     curLetter: String
   },
   mounted () {
-    this.scroll = new Bscroll(this.$refs.wrapper)
+    this.scroll = new Bscroll(this.$refs.wrapper, {click: true})
   },
   computed: {
     ...mapState(['city'])
